@@ -1,11 +1,12 @@
 //Check Off Specific Todos after clicking
 
-$("li").click(function(){
+//Add listeners for li that will be added after the page is loaded
+$("ul").on("click", "li", function(){
    $(this).toggleClass("completed");
 });
 
 //Delete Todos
-$("span").click(function(event){
+$("ul").on("click", "span", function(event){
    
     //($this) here refers to the span
     //$(this).parent() returns the enclosing li
@@ -15,4 +16,17 @@ $("span").click(function(event){
     });
     //Prevent event bubbling i.e. propagation of events to the li, container div and body
     event.stopPropagation();
+});
+
+//Create a new Todo
+$("input[type='text']").keypress(function(event){
+   //Whenever enter key is pressed
+    if(event.which === 13){
+       //Grab the text in the input
+        var textVal = $(this).val();
+        //clear the input
+        $(this).val("");
+        //Add a new li to the ul
+        $("ul").append("<li><span>X</span> " + textVal + "</li>");
+   }
 });
