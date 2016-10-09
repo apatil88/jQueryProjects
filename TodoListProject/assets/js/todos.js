@@ -1,5 +1,4 @@
 //Check Off Specific Todos after clicking
-
 //Add listeners for li that will be added after the page is loaded
 $("ul").on("click", "li", function(){
    $(this).toggleClass("completed");
