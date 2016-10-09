@@ -26,6 +26,11 @@ $("input[type='text']").keypress(function(event){
         //clear the input
         $(this).val("");
         //Add a new li to the ul
-        $("ul").append("<li><span>X</span> " + textVal + "</li>");
+        $("ul").append("<li><span><i class='fa fa-trash'></i></span> " + textVal + "</li>");
    }
+});
+
+//Fade out the input when tasks icon is clicked
+$(".fa-tasks").click(function(){
+   $("input[type='text']").fadeToggle(); 
 });
