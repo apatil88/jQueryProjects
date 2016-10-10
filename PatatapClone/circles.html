@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>Circles</title>
+        <link type="text/css" rel="stylesheet" href="circles.css">
+        
+        <!-- Load the Howler.js library -->
+        <script type="text/javascript" src="lib/howler.core.min.js"></script>
+        
+        <!--sound and color data for keys A-Z and 0-9 -->
+        <script type="text/javascript" src="keyData.js"></script>
+        
+        <!-- Load the Paper.js library -->
+        <script type="text/javascript" src="lib/paper-full.js"></script>
+        
+        <!-- Define inlined PaperScript associate it with myCanvas -->
+        <script type="text/paperscript" canvas="myCanvas"> 
+        
+        var circles = [];
+        
+        function onKeyDown(event) {
+           if(keyData[event.key]){
+               var maxPoint = new Point(view.size.width, view.size.height);
+               var randomPoint = Point.random();
+               var point = maxPoint * randomPoint;
+               // When a key is pressed, draw a circle
+               var myCircle = new Path.Circle(point, 500);
+
+               myCircle.fillColor = keyData[event.key].color;
+               keyData[event.key].sound.play();
+               circles.push(myCircle);
+            }
+           
+        }
+                   
+        function onFrame(event){
+            for(var i = 0 ; i < circles.length ; i++){
+                circles[i].fillColor.hue += 1;
+                circles[i].scale(0.91);
+                if(circles[i].area < 1){
+                    circles[i].remove();
+                    circles.splice(i,1);
+                }
+            }
+             
+        }
+        </script>
+    </head>
+    <body>
+        <canvas id="myCanvas" resize></canvas>
+    </body>
+</html>
